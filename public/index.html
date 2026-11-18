@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Интерактивная карта школ Астаны: точки и контуры зданий из QGIS Server.">
+  <meta name="theme-color" content="#123c4a">
+  <title>Школы Астаны — карта</title>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+  <link rel="stylesheet" href="/styles.css">
+  <script defer src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script defer src="/app.js"></script>
+</head>
+<body>
+  <header class="header">
+    <div>
+      <h1>Школы Астаны</h1>
+      <p>Интерактивная карта образовательных объектов</p>
+    </div>
+    <span class="place">Астана, Казахстан</span>
+  </header>
+  <main>
+    <aside class="panel" aria-label="Управление картой">
+      <h2>На карте</h2>
+      <fieldset>
+        <legend class="sr-only">Слои школ</legend>
+        <label class="layer-row"><input type="checkbox" id="points" checked><span class="symbol point" aria-hidden="true"></span><span>Точки школ</span></label>
+        <label class="layer-row"><input type="checkbox" id="polygons" checked><span class="symbol polygon" aria-hidden="true"></span><span>Контуры зданий</span></label>
+      </fieldset>
+      <label class="layer-row basemap"><input type="checkbox" id="basemap" checked><span>Подложка OpenStreetMap</span></label>
+      <button id="reset" type="button">Показать все школы</button>
+      <div class="connection">
+        <p id="status" role="status" aria-live="polite">Загружаем карту…</p>
+        <button id="retry" type="button" hidden>Повторить загрузку</button>
+      </div>
+      <p class="hint">Приближайте карту колёсиком мыши или кнопками + и −. Снимайте галочки, чтобы скрыть слои.</p>
+      <a class="service-link" href="/qgis?MAP=/app/Week_11_Variant_3.qgz&amp;SERVICE=WMS&amp;REQUEST=GetCapabilities" target="_blank" rel="noopener">Описание сервиса WMS</a>
+    </aside>
+    <div id="map" aria-label="Карта расположения школ Астаны"></div>
+  </main>
+  <noscript><p class="no-script">Включите JavaScript в браузере, чтобы открыть интерактивную карту.</p></noscript>
+</body>
+</html>

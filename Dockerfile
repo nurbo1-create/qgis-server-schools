@@ -1,4 +1,3 @@
-
 FROM ubuntu:24.04
 
 ENV DEBIAN_FRONTEND=noninteractive
@@ -12,19 +11,9 @@ RUN apt-get update && \
 
 WORKDIR /app
 COPY . /app
+COPY lighttpd.conf /etc/lighttpd/lighttpd.conf
 
-RUN printf '%s\n' \
-    'server.document-root = "/app"' \
-    'server.port = 10000' \
-    'server.bind = "0.0.0.0"' \
-    'server.modules = ( "mod_fastcgi" )' \
-    'fastcgi.server = ( "/qgis" => ((' \
-    '  "socket" => "/tmp/qgis.sock",' \
-    '  "bin-path" => "/usr/lib/cgi-bin/qgis_mapserv.fcgi",' \
-    '  "check-local" => "disable",' \
-    '  "max-procs" => 1' \
-    ')))' \
-    > /etc/lighttpd/lighttpd.conf
+RUN lighttpd -tt -f /etc/lighttpd/lighttpd.conf
 
 EXPOSE 10000
 
